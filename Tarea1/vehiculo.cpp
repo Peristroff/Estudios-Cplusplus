@@ -64,7 +64,7 @@ void Auto::calcularPrecio()
     //Aqui calcula con descuento
 }
 
-Moto::Moto(string marca, int precio): vehiculo("numeroMotor", "cantidadRuedas", "tipoCombustible", "anoFabricacion", "tipoAuto", "Tanque")
+Moto::Moto(string marca, int precio): vehiculo(numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion, "tipoAuto", "Tanque")
 {
     this->numeroMotor = numeroMotor;
     this->cantidadRuedas = cantidadRuedas;
@@ -98,7 +98,7 @@ void Moto::calcularPrecio()
     //Aqui calcula con descuento
 }
 
-CamionMediano::CamionMediano(string marca, int precio): vehiculo("numeroMotor", "cantidadRuedas", "tipoCombustible", "anoFabricacion", "tipoAuto", "Tanque")
+CamionMediano::CamionMediano(string marca, int precio): vehiculo(numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion, "tipoAuto", "tanque")
 {
     this->marca = marca;
     this->precio = precio;
@@ -128,7 +128,7 @@ void CamionMediano::calcularPrecio()
     //Aqui calcula con descuento
 }
 
-cliente::cliente(string nombre, string rut)
+cliente::cliente(string nombre, string rut): Auto("marca", 0), Moto("marca",0), CamionMediano("marca", 0)
 {
     this->nombre = nombre;
     this->rut = rut;
@@ -176,5 +176,5 @@ void vehiculo::CalcularPrecio()
     }
 }
 
-// hya que agregar los precios priero en una lista uwu
+// hay que agregar los precios primero en una lista uwu
 */
