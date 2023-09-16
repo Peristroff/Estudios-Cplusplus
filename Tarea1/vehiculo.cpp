@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+// TODO hacer que el programa entregue un menu al inicio
+
 vehiculo::vehiculo(int numeroMotor, int cantidadRuedas, int tipoCombustible, int anoFabricacion, string tipoAuto, string tanque)
 {
     this->numeroMotor = numeroMotor;
@@ -61,10 +63,10 @@ void Auto::mostrarDatosa()
 
 void Auto::calcularPrecio()
 {
-    //Aqui calcula con descuento
+    // TODO Aqui calcula el descuento
 }
 
-Moto::Moto(string marca, int precio): vehiculo("numeroMotor", "cantidadRuedas", "tipoCombustible", "anoFabricacion", "tipoAuto", "Tanque")
+Moto::Moto(string marca, int precio): vehiculo(0, 0, 0, 0, "", "")
 {
     this->numeroMotor = numeroMotor;
     this->cantidadRuedas = cantidadRuedas;
@@ -98,7 +100,7 @@ void Moto::calcularPrecio()
     //Aqui calcula con descuento
 }
 
-CamionMediano::CamionMediano(string marca, int precio): vehiculo("numeroMotor", "cantidadRuedas", "tipoCombustible", "anoFabricacion", "tipoAuto", "Tanque")
+CamionMediano::CamionMediano(string marca, int precio): vehiculo(0, 0, 0, 0, "", "")
 {
     this->marca = marca;
     this->precio = precio;
@@ -125,7 +127,7 @@ void CamionMediano::mostrarDatoscm()
 
 void CamionMediano::calcularPrecio()
 {
-    //Aqui calcula con descuento
+    // TODO calcular el descuento
 }
 
 cliente::cliente(string nombre, string rut)
