@@ -12,7 +12,7 @@ Persona::Persona(string nombre,string rut,string direccion,string telefono,strin
 }
 
 Persona::~Persona(){
-  cout<<"\nSaliendo de Persona";
+  cout<<"\nSaliendo de Persona"<<endl;
 }
 
 void Persona::pedirDatos(){
@@ -49,9 +49,11 @@ Profesor::Profesor(string cargo,string categoria):Persona("nombre","rut","direcc
   this->cargo = cargo;
   this->categoria = categoria;
 }
+
 Profesor::~Profesor(){
   cout<<"Liberando Profesor"<<endl;
 }
+
 void Profesor::pedirDatosP(){
   pedirDatos();
   cout<<"Escriba el Cargo ";
@@ -59,6 +61,7 @@ void Profesor::pedirDatosP(){
   cout<<"Escriba la Categoria ";
   cin>>this->categoria;
 }
+
 void Profesor::mostrarDatosP(){
   mostrarDatos();
   cout<<"Cargo: "<<this->cargo<<endl;
@@ -76,9 +79,11 @@ Estudiante::Estudiante(string carrera,string sede,double PPA):Persona("nombre","
   this->sede = sede;
   this->PPA = PPA;
 }
+
 Estudiante::~Estudiante(){
   cout<<"Liberando Estudiante"<<endl;
 }
+
 void Estudiante::pedirDatosE(){
   pedirDatos();
   cout<<"Escriba la Carrera ";
@@ -88,6 +93,7 @@ void Estudiante::pedirDatosE(){
   cout<<"Escriba el PPA ";
   cin>>this->PPA;
 }
+
 void Estudiante::mostrarDatosE(){
   mostrarDatos();
   cout<<"Carrera: "<<this->carrera<<endl;
