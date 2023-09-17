@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-// HACK por ahora RUT va a ser string, pero Jerry quiere que haya alguna comprobacion de que sea numero
+// HACK por ahora RUT va a ser string, pero Jerry quiere que haya alguna comprobacion de que sea numero y el ultimo digito sea un string
 Cliente::Cliente(string nombreCliente, string rutCliente)
 {
     this->nombre = nombreCliente;

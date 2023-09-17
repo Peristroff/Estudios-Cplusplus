@@ -1,14 +1,9 @@
-// #ifndef VEHICULO_H
-// #define VEHICULO_H
-
 #include <iostream>
 #include <string>
 #include <map>
 using namespace std;
 
-// Ver los precios en precios.h
-extern const map<string, int> preciosvehiculos; // Declaración externa del mapa
-
+// TODO Seleccionar el precio de automovil basado en lo que ponga el usuario
 // Clase padre vehiculo, con los atributos numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion, tipoAuto, tanque
 class Vehiculo 
 {
@@ -24,10 +19,9 @@ class Vehiculo
         void MostrarDatosv();
 };
 
-//Clase hijo de vehiculo, heredero de los atributos mas la variable marca y precio
+// Clase hijo de vehiculo, heredero de los atributos mas la variable marca y precio
 class Auto:public Vehiculo
 {
-    
     public:
         string marca;
         int precio;
@@ -37,7 +31,7 @@ class Auto:public Vehiculo
         
         void PedirDatosA();
         void MostrarDatosA();
-        void CalcularPrecioA();
+        int CalcularPrecioA(string marca);
 };
 
 class Moto:public Vehiculo
@@ -69,33 +63,3 @@ class CamionMediano:public Vehiculo
         void MostrarDatosCM();
         void CalcularPrecioCM();
 };
-
-// // FIXME hay dos clases clientes
-// class Cliente:public Vehiculo, public Auto, public Moto, public CamionMediano  
-// {
-//     protected:
-//         string nombre, rut;
-//     public:
-//         Cliente(string nombre, string rut);
-//         ~Cliente();
-//         // Declaraciones de metodos relacionados con la funcionalidad de venta
-//         // pongo esto aca para que se pueda programar en el .cpp los metodos sjjss
-//         void pedirDatosc();
-//         void mostrarDatosc();
-//         void ventaVehiculo();
-//         void reporteMensual();
-//         void clienteQueComproMas();
-//         void cantidadDeAutosComprados();
-//         void cantidadDeMotosCompradas();
-//         void cantidadDeCamionesComprados();
-//         void cantidadTotalDeVehiculosComprados();
-//         void totalDeVentasDeAutos();
-//         void totalDeVentasDeMotos();
-//         void totalDeVentasDeCamiones();
-//         void totalDeVentasDeVehiculos();
-//         void promedioDeVentasDeAutos();
-//         void promedioDeVentasDeMotos();
-//         void promedioDeVentasDeCamiones();
-//         void promedioDeVentasTotalesDeVehiculos();
-// };
-//#endif // VEHICULO_H

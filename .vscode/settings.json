@@ -99,5 +99,5 @@
     "streambuf": "cpp",
     "typeinfo": "cpp"
   },
-  "todo-tree.tree.scanMode": "workspace only"
+  "todo-tree.tree.scanMode": "workspace"
 }

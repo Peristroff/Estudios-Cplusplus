@@ -18,6 +18,7 @@ Vehiculo::~Vehiculo()
     cout << "\n Destructor de vehiculo";
 }
 
+// TODO manejar excepciones para que el usuario no ingrese un valor que no corresponda
 void Vehiculo::PedirDatosVehiculo()
 {
     cout << "\n Ingrese el numero de motor: ";
@@ -59,22 +60,24 @@ void Auto::MostrarDatosA()
     cout << "\n Precio: " << this -> precio;
 }
 
-void Auto::CalcularPrecioA()
+// TODO manejar excepciones para que entrege un error si la marca no está en el diccionario
+int Auto::CalcularPrecioA(string marcaAuto)
 {
     int precioBase = 0;
-    if (marca == "Toyota") {
-        precioBase = preciosvehiculos.at("Toyota");
-    } else if (marca == "Hyundai") {
-        precioBase = preciosvehiculos.at("Hyundai");
-    } else if (marca == "Suzuki") {
-        precioBase = preciosvehiculos.at("Suzuki");
-    } else if (marca == "Ford") {
-        precioBase = preciosvehiculos.at("Ford");
-    } else if (marca == "Chevrolet") {
-        precioBase = preciosvehiculos.at("Chevrolet");
-    } else if (marca == "Honda") {
-        precioBase = preciosvehiculos.at("Honda");
+    if (marcaAuto == "Toyota") {
+        precioBase = preciosAutos.at("Toyota");
+    } else if (marcaAuto == "Hyundai") {
+        precioBase = preciosAutos.at("Hyundai");
+    } else if (marcaAuto == "Suzuki") {
+        precioBase = preciosAutos.at("Suzuki");
+    } else if (marcaAuto == "Ford") {
+        precioBase = preciosAutos.at("Ford");
+    } else if (marcaAuto == "Chevrolet") {
+        precioBase = preciosAutos.at("Chevrolet");
+    } else if (marcaAuto == "Honda") {
+        precioBase = preciosAutos.at("Honda");
     }
+    return precioBase;
 }
 
 Moto::Moto(string marcaMoto, int precioMoto): Vehiculo(0, 0, 0, 0, "", "")
@@ -105,8 +108,8 @@ void Moto::MostrarDatosM()
 void Moto::CalcularPrecioM()
 {
     // Buscar el precio en el mapa usando la marca
-    map<string, int>::const_iterator it = preciosvehiculos.find(marca);
-    if (it != preciosvehiculos.end()) {
+    map<string, int>::const_iterator it = preciosAutos.find(marca);
+    if (it != preciosAutos.end()) {
         double precioBase = it->second;
 
         // Obtener el año de fabricación del vehículo
