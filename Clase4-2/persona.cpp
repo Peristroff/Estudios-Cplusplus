@@ -2,13 +2,13 @@
 #include "persona.h"
 using namespace std;
 
-Persona::Persona(string nombre,string rut,string direccion,string telefono,string sexo,string correo){
-  this->nombre = nombre;
-  this->rut = rut;
-  this->direccion = direccion;
-  this->telefono = telefono;
-  this->sexo = sexo;
-  this->correo = correo;
+Persona::Persona(string nombrePersona,string rutPersona,string direccionPersona,string telefonoPersona,string sexoPersona,string correoPersona){
+  this->nombre = nombrePersona;
+  this->rut = rutPersona;
+  this->direccion = direccionPersona;
+  this->telefono = telefonoPersona;
+  this->sexo = sexoPersona;
+  this->correo = correoPersona;
 }
 
 Persona::~Persona(){
@@ -16,13 +16,13 @@ Persona::~Persona(){
 }
 
 void Persona::pedirDatos(){
-  cout<<"\nEscriba el Nombre ";
+  cout<<"Escriba el Nombre ";
   cin>>this->nombre;
-  cout<<"\nEscriba el RUT ";
+  cout<<"Escriba el RUT ";
   cin>>this->rut;
-  cout<<"\nEscriba la Dirección ";
+  cout<<"Escriba la Dirección ";
   cin>>this->direccion;
-  cout<<"\nEscriba el Telefono ";
+  cout<<"Escriba el Telefono ";
   cin>>this->telefono;
   cout<<"Escriba el Sexo ";
   cin>>this->sexo;
@@ -39,15 +39,15 @@ void Persona::mostrarDatos(){
   cout<<"Correo: "<<this->correo<<endl;
 }
 
-Profesor::Profesor(string cargo,string categoria):Persona("nombre","rut","direccion","telefono","sexo","correo"){
+Profesor::Profesor(string cargoProfesor,string categoriaProfesor):Persona("nombre","rut","direccion","telefono","sexo","correo"){
   this->nombre = nombre;
   this->rut = rut;
   this->direccion = direccion;
   this->telefono = telefono;
   this->sexo = sexo;
   this->correo = correo;
-  this->cargo = cargo;
-  this->categoria = categoria;
+  this->cargo = cargoProfesor;
+  this->categoria = categoriaProfesor;
 }
 
 Profesor::~Profesor(){
@@ -68,16 +68,16 @@ void Profesor::mostrarDatosP(){
   cout<<"Categoria: "<<this->categoria<<endl;
 }
 
-Estudiante::Estudiante(string carrera,string sede,double PPA):Persona("nombre","rut","direccion","telefono","sexo","correo"){
+Estudiante::Estudiante(string carreraEstudiante,string sedeEstudiante,double PPAEstudiante):Persona("nombre","rut","direccion","telefono","sexo","correo"){
   this->nombre = nombre;
   this->rut = rut;
   this->direccion = direccion;
   this->telefono = telefono;
   this->sexo = sexo;
   this->correo = correo;
-  this->carrera = carrera;
-  this->sede = sede;
-  this->PPA = PPA;
+  this->carrera = carreraEstudiante;
+  this->sede = sedeEstudiante;
+  this->PPA = PPAEstudiante;
 }
 
 Estudiante::~Estudiante(){

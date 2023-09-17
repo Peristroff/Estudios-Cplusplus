@@ -1,23 +1,31 @@
+// #ifndef VEHICULO_H
+// #define VEHICULO_H
+
 #include <iostream>
 #include <string>
+#include <map>
 using namespace std;
 
-//Clase padre vehiculo, con los atributos numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion, tipoAuto, tanque
-class vehiculo 
+// Ver los precios en precios.h
+extern const map<string, int> preciosvehiculos; // Declaración externa del mapa
+
+// Clase padre vehiculo, con los atributos numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion, tipoAuto, tanque
+class Vehiculo 
 {
     // En vez de la variable deposito de combustible, se va a dejar la variable capTanque, que se debe ingresar los litros si es gasolina y el string NO si es electrico  
     public:
         int numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion;
         string tipoAuto, tanque;
 
-        vehiculo(int numeroMotor, int cantidadRuedas, int tipoCombustible, int anoFabricacion, string tipoAuto, string tanque);
-        ~vehiculo();
+        Vehiculo(int numeroMotor, int cantidadRuedas, int tipoCombustible, int anoFabricacion, string tipoAuto, string tanque);
+        ~Vehiculo();
 
         void PedirDatosVehiculo();
         void MostrarDatosv();
 };
+
 //Clase hijo de vehiculo, heredero de los atributos mas la variable marca y precio
-class Auto:public vehiculo
+class Auto:public Vehiculo
 {
     
     public:
@@ -27,29 +35,27 @@ class Auto:public vehiculo
         Auto(string marca, int precio);
         ~Auto();
         
-        void pedirDatosa();
-        void mostrarDatosa();
-        void calcularPrecio();
+        void PedirDatosA();
+        void MostrarDatosA();
+        void CalcularPrecioA();
 };
 
-class Moto:public vehiculo
+class Moto:public Vehiculo
 {
     protected:
         string marca;
-    
-    public:
         int precio;
-        
+    public:
         Moto(string marca, int precio);
         ~Moto();
 
-        void pedirDatosm();
-        void mostrarDatosm();
-        void calcularPrecio();
+        void PedirDatosM();
+        void MostrarDatosM();
+        void CalcularPrecioM();
 
 };
 
-class CamionMediano:public vehiculo
+class CamionMediano:public Vehiculo
 {
     protected:
         string marca;
@@ -59,19 +65,37 @@ class CamionMediano:public vehiculo
         CamionMediano(string marca, int precio);
         ~CamionMediano();
 
-        void pedirDatoscm();
-        void mostrarDatoscm();
-        void calcularPrecio();
+        void PedirDatosCM();
+        void MostrarDatosCM();
+        void CalcularPrecioCM();
 };
 
-class cliente:public vehiculo, public Auto, public Moto, public CamionMediano  
-{
-    protected:
-        string nombre, rut;
-    public:
-        cliente(string nombre, string rut);
-        ~cliente();
-
-        void pedirDatosc();
-        void mostrarDatosc();
-};
+// // FIXME hay dos clases clientes
+// class Cliente:public Vehiculo, public Auto, public Moto, public CamionMediano  
+// {
+//     protected:
+//         string nombre, rut;
+//     public:
+//         Cliente(string nombre, string rut);
+//         ~Cliente();
+//         // Declaraciones de metodos relacionados con la funcionalidad de venta
+//         // pongo esto aca para que se pueda programar en el .cpp los metodos sjjss
+//         void pedirDatosc();
+//         void mostrarDatosc();
+//         void ventaVehiculo();
+//         void reporteMensual();
+//         void clienteQueComproMas();
+//         void cantidadDeAutosComprados();
+//         void cantidadDeMotosCompradas();
+//         void cantidadDeCamionesComprados();
+//         void cantidadTotalDeVehiculosComprados();
+//         void totalDeVentasDeAutos();
+//         void totalDeVentasDeMotos();
+//         void totalDeVentasDeCamiones();
+//         void totalDeVentasDeVehiculos();
+//         void promedioDeVentasDeAutos();
+//         void promedioDeVentasDeMotos();
+//         void promedioDeVentasDeCamiones();
+//         void promedioDeVentasTotalesDeVehiculos();
+// };
+//#endif // VEHICULO_H
