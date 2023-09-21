@@ -1,9 +1,10 @@
 #include "vehiculo.h"
 #include "precios.h"
 #include <iostream>
+#include <cctype>
 using namespace std;
 
-Vehiculo::Vehiculo(int numeroMotorVehiculo, int cantidadRuedasVehiculo, int tipoCombustibleVehiculo, int anoFabricacionVehiculo, string tipoAutoVehiculo, string tanqueVehiculo)
+Vehiculo::Vehiculo(int numeroMotorVehiculo, int cantidadRuedasVehiculo, int anoFabricacionVehiculo, string tipoCombustibleVehiculo, string tipoAutoVehiculo, string tanqueVehiculo)
 {
     this->numeroMotor = numeroMotorVehiculo;
     this->cantidadRuedas = cantidadRuedasVehiculo;
@@ -23,19 +24,44 @@ void Vehiculo::PedirDatosVehiculo()
 {
     cout << "\n Ingrese el numero de motor: ";
     cin >> this -> numeroMotor;
+    
     cout << "\n Ingrese la cantidad de ruedas: ";
     cin >> this -> cantidadRuedas;
-    cout << "\n Ingrese el tipo de combustible: ";
-    cin >> this -> tipoAuto;
-    cout << "\n Ingrese el deposito de combustible: ";
+    
+    cout << "\n Ingrese el tipo de combustible (gasolina, gas o electrico): ";
+    cin >> this -> tipoCombustible;
+    
+    cout << "\n Ingrese el deposito de combustible (capacidad del tanque en litros si es gasolina): ";
     cin >> this -> tanque;
-    cout << "\n Ingrese el ano de fabricacion: ";
+
+    cout << "\n Ingrese el año de fabricacion: ";
     cin >> this -> anoFabricacion;
+
     cout << "\n Ingrese el tipo de auto: ";
+    cout << "\n a. Auto";
+    cout << "\n b. Moto";
+    cout << "\n c. Camion Mediano\n";
     cin >> this -> tipoAuto;
+    
+    // Para tranformar a minusculas
+    for (char &c : tipoAuto) {
+        c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+    }
+
+    if (tipoAuto == "a" || tipoAuto == "auto") {
+        Auto auto1("", 0);
+        auto1.PedirDatosA();
+    } else if (tipoAuto == "b" || tipoAuto == "moto") {
+        Moto moto1("", 0);
+        moto1.PedirDatosM();
+    } else if (tipoAuto == "c" ||tipoAuto == "camion mediano") {
+        CamionMediano camionMediano1("", 0);
+        camionMediano1.PedirDatosCM();
+    }
+
 }
 
-Auto::Auto(string marcaAuto, int precioAuto):Vehiculo(0, 0, 0, 0, "", "")
+Auto::Auto(string marcaAuto, int precioAuto):Vehiculo(0, 0, 0, "", "", "")
 {
     this->marca = marcaAuto;
     this->precio = precioAuto;
@@ -43,15 +69,15 @@ Auto::Auto(string marcaAuto, int precioAuto):Vehiculo(0, 0, 0, 0, "", "")
 
 Auto::~Auto()
 {
-    cout << "\n Destructor de Auto";
+    //cout << "\n Destructor de Auto";
 }
 
 void Auto::PedirDatosA()
 {
     cout << "\n Ingrese la marca del auto: ";
     cin >> this -> marca;
-    cout << "\n Ingrese el precio del auto: ";
-    cin >> this -> precio;
+    precio = CalcularPrecioA(marca);
+    cout << "\n El precio base es: " << precio;
 }
 
 void Auto::MostrarDatosA()
@@ -64,23 +90,26 @@ void Auto::MostrarDatosA()
 int Auto::CalcularPrecioA(string marcaAuto)
 {
     int precioBase = 0;
-    if (marcaAuto == "Toyota") {
+    if (marcaAuto == "Toyota" || marcaAuto == "toyota") {
         precioBase = preciosAutos.at("Toyota");
-    } else if (marcaAuto == "Hyundai") {
+    } else if (marcaAuto == "Hyundai" || marcaAuto == "hyundai") {
         precioBase = preciosAutos.at("Hyundai");
-    } else if (marcaAuto == "Suzuki") {
+    } else if (marcaAuto == "Suzuki" || marcaAuto == "suzuki") {
         precioBase = preciosAutos.at("Suzuki");
-    } else if (marcaAuto == "Ford") {
+    } else if (marcaAuto == "Ford" || marcaAuto == "ford") {
         precioBase = preciosAutos.at("Ford");
-    } else if (marcaAuto == "Chevrolet") {
+    } else if (marcaAuto == "Chevrolet" || marcaAuto == "chevrolet") {
         precioBase = preciosAutos.at("Chevrolet");
-    } else if (marcaAuto == "Honda") {
+    } else if (marcaAuto == "Honda" || marcaAuto == "honda") {
         precioBase = preciosAutos.at("Honda");
+    }
+    else {
+        cout << "Marca no encontrada en la lista de precios." << endl;
     }
     return precioBase;
 }
 
-Moto::Moto(string marcaMoto, int precioMoto): Vehiculo(0, 0, 0, 0, "", "")
+Moto::Moto(string marcaMoto, int precioMoto): Vehiculo(0, 0, 0, "", "", "")
 {
     this->marca = marcaMoto;
     this->precio = precioMoto;
@@ -88,7 +117,7 @@ Moto::Moto(string marcaMoto, int precioMoto): Vehiculo(0, 0, 0, 0, "", "")
 
 Moto::~Moto()
 {
-    cout << "\n Destructor de Moto";
+    //cout << "\n Destructor de Moto";
 }
 
 void Moto::PedirDatosM()
@@ -147,7 +176,7 @@ void Moto::CalcularPrecioM()
     }
 }
 
-CamionMediano::CamionMediano(string marcaAuto, int precioAuto): Vehiculo(0, 0, 0, 0, "", "")
+CamionMediano::CamionMediano(string marcaAuto, int precioAuto): Vehiculo(0, 0, 0, "", "", "")
 {
     this->marca = marcaAuto;
     this->precio = precioAuto;
@@ -155,7 +184,7 @@ CamionMediano::CamionMediano(string marcaAuto, int precioAuto): Vehiculo(0, 0, 0
 
 CamionMediano::~CamionMediano()
 {
-    cout << "\n Destructor de Camion Mediano";
+    //cout << "\n Destructor de Camion Mediano";
 }
 
 void CamionMediano::PedirDatosCM()

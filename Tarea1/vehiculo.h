@@ -9,10 +9,10 @@ class Vehiculo
 {
     // En vez de la variable deposito de combustible, se va a dejar la variable capTanque, que se debe ingresar los litros si es gasolina y el string NO si es electrico  
     public:
-        int numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion;
-        string tipoAuto, tanque;
+        int numeroMotor, cantidadRuedas, anoFabricacion;
+        string tipoCombustible, tipoAuto, tanque;
 
-        Vehiculo(int numeroMotor, int cantidadRuedas, int tipoCombustible, int anoFabricacion, string tipoAuto, string tanque);
+        Vehiculo(int numeroMotor, int cantidadRuedas, int anoFabricacion, string tipoCombustible, string tipoAuto, string tanque);
         ~Vehiculo();
 
         void PedirDatosVehiculo();
