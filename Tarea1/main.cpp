@@ -3,9 +3,10 @@
 #include "cliente.h"
 #include "precios.h"
 #include "vehiculo.h"
+#include "CSVparser.hpp"
 using namespace std;
 
-// TODO Jerry menciono que la forma que hay que manejar el archivo en que se guardan los datos, puede ser un array, en archivo .json o .csv
+// TODO manipular archivos para guardar datos de clientes y vehiculos y manipular variables para calcular los datos pedidos en los menu
 int main() {
     Menu menu;
     Cliente cliente("", "");
@@ -32,7 +33,7 @@ int main() {
                 // TODO ingresar funcion para ver ventas de vehiculos
                 break;
             case 5:
-                cout << "Saliendo del programa..." << endl;
+                cout << "Saliendo del programa...\n" << endl;
                 break;
             default:
                 cout << "\nOpcion no válida. Intente de nuevo." << endl;

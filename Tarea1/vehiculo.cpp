@@ -16,7 +16,43 @@ Vehiculo::Vehiculo(int numeroMotorVehiculo, int cantidadRuedasVehiculo, int anoF
 
 Vehiculo::~Vehiculo()
 {
-    cout << "\n Destructor de vehiculo";
+    //cout << "\n Destructor de vehiculo";
+}
+string entradaValidaString(string &entrada)
+{
+    bool String = false;
+    do
+    {
+        if (cin >> entrada)
+        {
+            String = true;
+        }
+        else
+        {
+            cout << "Favor ingresar un string: ";
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+    }while (!String);
+    return entrada;
+}
+int entradaValidaNumeros(int &entrada)
+{
+    bool Numero = false;
+    do
+    {
+        if (cin >> entrada && entrada > 0)
+        {
+            Numero = true;
+        }
+        else
+        {
+            cout << "Favor ingresar un numero entero positivo: ";
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+    }while (!Numero);
+    return entrada;
 }
 
 // TODO manejar excepciones para que el usuario no ingrese un valor que no corresponda
@@ -24,18 +60,23 @@ void Vehiculo::PedirDatosVehiculo()
 {
     cout << "\n Ingrese el numero de motor: ";
     cin >> this -> numeroMotor;
-    
+    numeroMotor = entradaValidaNumeros(numeroMotor);
+
     cout << "\n Ingrese la cantidad de ruedas: ";
     cin >> this -> cantidadRuedas;
-    
+    cantidadRuedas = entradaValidaNumeros(cantidadRuedas);
+
     cout << "\n Ingrese el tipo de combustible (gasolina, gas o electrico): ";
     cin >> this -> tipoCombustible;
-    
+    tipoCombustible = entradaValidaString(tipoCombustible);
+
     cout << "\n Ingrese el deposito de combustible (capacidad del tanque en litros si es gasolina): ";
     cin >> this -> tanque;
+    tanque = entradaValidaString(tanque);
 
     cout << "\n Ingrese el año de fabricacion: ";
     cin >> this -> anoFabricacion;
+    anoFabricacion = entradaValidaNumeros(anoFabricacion);
 
     cout << "\n Ingrese el tipo de auto: ";
     cout << "\n a. Auto";
@@ -80,6 +121,7 @@ void Auto::PedirDatosA()
     // TODO entregar el precio con descuento y aplicar primero el descuento por año y luego el incremento de precio por el tipo de combustible
     precio = CalcularPrecioA(marca);
     cout << "\n El precio base es: " << precio;
+    
 }
 
 void Auto::MostrarDatosA()
@@ -106,6 +148,7 @@ int Auto::CalcularPrecioA(string marcaAuto)
         precioBase = preciosAutos.at("Honda");
     }
     else {
+        // TODO volver al mismo menu para que ingrese la marca de nuevo
         cout << "Marca no encontrada en la lista de precios." << endl;
     }
     return precioBase;

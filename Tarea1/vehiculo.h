@@ -3,7 +3,6 @@
 #include <map>
 using namespace std;
 
-// TODO Seleccionar el precio de automovil basado en lo que ponga el usuario
 // Clase padre vehiculo, con los atributos numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion, tipoAuto, tanque
 class Vehiculo 
 {
