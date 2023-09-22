@@ -76,6 +76,8 @@ void Auto::PedirDatosA()
 {
     cout << "\n Ingrese la marca del auto: ";
     cin >> this -> marca;
+
+    // TODO entregar el precio con descuento y aplicar primero el descuento por año y luego el incremento de precio por el tipo de combustible
     precio = CalcularPrecioA(marca);
     cout << "\n El precio base es: " << precio;
 }

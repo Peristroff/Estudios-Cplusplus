@@ -1,1 +1,2 @@
-launch.json
+# Agregar aqui los archivos a ignorar por GitHub
+.vscode\

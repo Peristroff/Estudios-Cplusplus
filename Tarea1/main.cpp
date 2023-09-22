@@ -5,7 +5,7 @@
 #include "vehiculo.h"
 using namespace std;
 
-// HACK Jerry no especificó en el archivo que entregó como se manejan los datos de los vehículos que se venden, por lo que se podrían almacenar un array, en archivo .json o .csv
+// TODO Jerry menciono que la forma que hay que manejar el archivo en que se guardan los datos, puede ser un array, en archivo .json o .csv
 int main() {
     Menu menu;
     Cliente cliente("", "");
