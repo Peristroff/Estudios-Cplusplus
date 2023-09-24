@@ -3,10 +3,10 @@
 using namespace std;
 
 class Menu {
-public:
-    void MostrarMenu();
-    void SubmenuRaiz();
-    void Submenu1();
-    void Submenu2();
-    void Submenu3();
+    public:
+        void MostrarMenu();
+        void SubmenuRaiz();
+        void Submenu1();
+        void Submenu2();
+        void Submenu3();
 };

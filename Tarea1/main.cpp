@@ -8,8 +8,8 @@
 #include "CSVparser.hpp"
 using namespace std;
 
-// TODO manipular archivos para guardar datos de clientes y vehiculos y manipular variables para calcular los datos pedidos en los menu
-
+// TODO hacer pruebas con multiples entradas y probar los otros tipos de vehiculos
+// BUG el promedio de las ventas no se esta leyendo en el archivo csv
 int main() {
     CrearArchivo();
 
@@ -31,34 +31,13 @@ int main() {
                 EscribirArchivo(cliente.nombre, cliente.rut, vehiculo.tipoAuto, marcaG, vehiculo.numeroMotor, vehiculo.cantidadRuedas, vehiculo.tipoCombustible, vehiculo.tanque, vehiculo.anoFabricacion, precioG);
                 break;
             case 2:
-                // TODO ingresar funcion para ver promedio de ventas
                 menu.Submenu1();
-                cout << "Ingrese su eleccion: ";
-                cin >> opcion;
-                
-                switch (opcion)
-                {
-                    case 1:
-                        
-                        break;
-                    case 2:
-                        
-                        break;
-                    case 3:
-                        
-                        break;
-                    case 4:
-                    
-                        break;
-                    default:
-                        break;
-                }
                 break;
             case 3:
-                // TODO ingresar funcion para ver cantidad de vehiculos comprados
+                menu.Submenu2();
                 break;
             case 4:
-                // TODO ingresar funcion para ver ventas de vehiculos
+                menu.Submenu3();
                 break;
             case 5:
                 cout << "Saliendo del programa...\n" << endl;

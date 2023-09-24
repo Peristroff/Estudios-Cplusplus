@@ -8,4 +8,9 @@ void EscribirArchivo(string nombreCliente = "", string rutCliente = "", string t
 
 void AnalizarArchivo();
 
+int CantidadVehiculos(string tipoVehiculo);
+int VendidoVehiculos(string tipoVehiculo);
+int PromedioVehiculos(string tipoVehiculo);
+int PromedioGeneral();
+
 #endif

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "menu.h"
+#include "administradorDeArchivos.h"
 using namespace std;
 
 // Menu para navegar en las distintas funciones del codigo
@@ -24,16 +25,41 @@ void Menu::Submenu1()
 {
     cout << "\nMostrar promedio de ventas:" << endl;
     SubmenuRaiz();
+    int opcion;
+    cout << "Ingrese una opción: ";
+    cin >> opcion;
+        switch (opcion) {
+        case 1:
+            cout << "Promedio de ventas de Autos: $" << PromedioVehiculos("auto") << endl;
+            break;
+        case 2:
+            cout << "Promedio de ventas de Motos: $" << PromedioVehiculos("moto") << endl;
+            break;
+        case 3:
+            cout << "Promedio de ventas de Camiones: $" << PromedioVehiculos("camiones") << endl;
+            break;
+        case 4:
+            cout << "Promedio de ventas totales de vehículos: $" << PromedioGeneral() << endl;
+            break;
+        default:
+            cout << "Opción no válida." << endl;
+    }
 }
 
 void Menu::Submenu2()
 {
     cout << "\nMostrar cantidad de vehiculos comprados:" << endl;
     SubmenuRaiz();
+    int opcion;
+    cout << "Ingrese una opción: ";
+    cin >> opcion;
 }
 
 void Menu::Submenu3()
 {
     cout << "\nMostrar ventas de vehiculos:" << endl;
     SubmenuRaiz();
+    int opcion;
+    cout << "Ingrese una opción: ";
+    cin >> opcion;
 }
