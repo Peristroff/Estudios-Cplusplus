@@ -11,14 +11,15 @@ Cliente::Cliente(string nombreCliente, string rutCliente)
 
 Cliente::~Cliente()
 {
-    //cout << "\n Destructor de Cliente";
+    cout << "\n Destructor de Cliente";
 }
 
 // Funcion para ingresar los datos a las variables de la clase
 void Cliente::PedirDatosC()
 {
+    cin.ignore(); // Limpia el búfer de entrada para evitar un bug de getline
     cout << "\n Ingrese el nombre del cliente: ";
-    cin >> this -> nombre;
+    getline(cin, this -> nombre);
 
     cout << "\n Ingrese el RUT del cliente: ";
     cin >> this -> rut;

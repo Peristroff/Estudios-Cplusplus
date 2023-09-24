@@ -13,7 +13,6 @@ using namespace std;
 string marcaG;
 int precioG;
 
-// BUG modificar el precio que se guarda en el csv, actualmente se esta guardando el precio sin los descuentos
 // Prototipo de las funciones, las funciones que estan al final del archivo no funcionan si no se declara el prototipo antes
 double CalcularDescuentos(int precioBase, int anoFabricacion, string tipoAuto);
 string TransformarAMinusculas(string palabra);
@@ -30,7 +29,7 @@ Vehiculo::Vehiculo(int numeroMotorVehiculo, int cantidadRuedasVehiculo, int anoF
 
 Vehiculo::~Vehiculo()
 {
-    //cout << "\n Destructor de vehiculo";
+    cout << "\n Destructor de vehiculo";
 }
 
 // Comprueba si se ingresa un string
@@ -106,21 +105,21 @@ void Vehiculo::PedirDatosVehiculo()
     autoSeleccionado = TransformarAMinusculas(autoSeleccionado);
 
     if (autoSeleccionado == "a" || autoSeleccionado == "auto") {
-        this -> tipoAuto = "Auto";
+        this -> tipoAuto = "auto";
         Auto auto1("", 0);
-        auto1.PedirDatosA(this -> tipoAuto, this -> anoFabricacion);
+        auto1.PedirDatosA(this -> tipoCombustible, this -> anoFabricacion);
         marcaG = auto1.marca;
         precioG = auto1.precio;
     } else if (autoSeleccionado == "b" || autoSeleccionado == "moto") {
-        this -> tipoAuto = "Moto";
+        this -> tipoAuto = "moto";
         Moto moto1("", 0);
-        moto1.PedirDatosM(this -> tipoAuto, this -> anoFabricacion);
+        moto1.PedirDatosM(this -> tipoCombustible, this -> anoFabricacion);
         marcaG = moto1.marca;
         precioG = moto1.precio;
     } else if (autoSeleccionado == "c" ||autoSeleccionado == "camion mediano") {
-        this -> tipoAuto = "Camion Mediano";
+        this -> tipoAuto = "camion mediano";
         CamionMediano camionMediano1("", 0);
-        camionMediano1.PedirDatosCM(this -> tipoAuto, this -> anoFabricacion);
+        camionMediano1.PedirDatosCM(this -> tipoCombustible, this -> anoFabricacion);
         marcaG = camionMediano1.marca;
         precioG = camionMediano1.precio;
     }
@@ -134,11 +133,11 @@ Auto::Auto(string marcaAuto, int precioAuto):Vehiculo(0, 0, 0, "", "", "")
 
 Auto::~Auto()
 {
-    //cout << "\n Destructor de Auto";
+    cout << "\n Destructor de Auto";
 }
 
 // Ingresa los datos a las variables de la clase Auto
-void Auto::PedirDatosA(string tipoAutoA, int anoFabricacionA)
+void Auto::PedirDatosA(string tipoCombustibleA, int anoFabricacionA)
 {
     double precioFinal;
     cout << "\n Ingrese la marca del auto: ";
@@ -148,25 +147,31 @@ void Auto::PedirDatosA(string tipoAutoA, int anoFabricacionA)
 
     cout << "\n El precio base es: $" << precio;
     
-    precioFinal = CalcularDescuentos(precio, anoFabricacionA, tipoAutoA);
+    precioFinal = CalcularDescuentos(precio, anoFabricacionA, tipoCombustibleA);
     
     cout << "\n El precio final es: $" << fixed << setprecision(0) << precioFinal << endl;
+
+    this->precio = static_cast<int>(precioFinal);
 }
 
-//TODO manejar excepciones para que entrege un error si la marca no está en el diccionario
 // Funcion para calcular el precio del auto segun la marca alojada en precios.h
 int Auto::CalcularPrecioA(string marcaAuto)
 {
     marcaAuto = TransformarAMinusculas(marcaAuto);
     int precioBase = 0;
-    try {
-        precioBase = preciosAutos.at(marcaAuto);
-    } catch(const out_of_range& e) 
+    while (true)
     {
-        cout << "Marca no encontrada en la lista de precios." << endl;
-        cout << "Ingrese una marca valida: ";
-        cin >> marcaAuto;
-        CalcularPrecioA(marcaAuto);
+        try {
+            precioBase = preciosAutos.at(marcaAuto);
+            this -> marca = marcaAuto;
+            break;
+        } catch(const out_of_range& e) 
+        {
+            cout << "Marca no encontrada en la lista de precios." << endl;
+            cout << "Ingrese una marca valida: ";
+            cin >> marcaAuto;
+            marcaAuto = TransformarAMinusculas(marcaAuto);
+        }
     }
     return precioBase;
 }
@@ -179,11 +184,11 @@ Moto::Moto(string marcaMoto, int precioMoto): Vehiculo(0, 0, 0, "", "", "")
 
 Moto::~Moto()
 {
-    //cout << "\n Destructor de Moto";
+    cout << "\n Destructor de Moto";
 }
 
 // Ingresa los datos a las variables de la clase Moto
-void Moto::PedirDatosM(string tipoAutoM, int anoFabricacionM)
+void Moto::PedirDatosM(string tipoCombustibleM, int anoFabricacionM)
 {
     double precioFinal;
     cout << "\n Ingrese la marca de la moto: ";
@@ -193,9 +198,11 @@ void Moto::PedirDatosM(string tipoAutoM, int anoFabricacionM)
 
     cout << "\n El precio base es: $" << precio;
     
-    precioFinal = CalcularDescuentos(precio, anoFabricacionM, tipoAutoM);
+    precioFinal = CalcularDescuentos(precio, anoFabricacionM, tipoCombustibleM);
     
     cout << "\n El precio final es: $" << fixed << setprecision(0) << precioFinal << endl;
+
+    this->precio = static_cast<int>(precioFinal);
 }
 
 // Funcion para calcular el precio de la Moto segun la marca alojada en precios.h
@@ -203,14 +210,19 @@ int Moto::CalcularPrecioM(string marcaMoto)
 {
     marcaMoto = TransformarAMinusculas(marcaMoto);
     int precioBase = 0;
-    try {
-        precioBase = preciosMotos.at(marcaMoto);
-    } catch(const out_of_range& e) 
+    while (true)
     {
-        cout << "Marca no encontrada en la lista de precios." << endl;
-        cout << "Ingrese una marca valida: ";
-        cin >> marcaMoto;
-        CalcularPrecioM(marcaMoto);
+        try {
+            precioBase = preciosMotos.at(marcaMoto);
+            this -> marca = marcaMoto;
+            break;
+        } catch(const out_of_range& e) 
+        {
+            cout << "Marca no encontrada en la lista de precios." << endl;
+            cout << "Ingrese una marca valida: ";
+            cin >> marcaMoto;
+            marcaMoto = TransformarAMinusculas(marcaMoto);
+        }
     }
     return precioBase;
 }
@@ -223,22 +235,24 @@ CamionMediano::CamionMediano(string marcaCamion, int precioCamion): Vehiculo(0, 
 
 CamionMediano::~CamionMediano()
 {
-    //cout << "\n Destructor de Camion Mediano";
+    cout << "\n Destructor de Camion Mediano";
 }
 
-void CamionMediano::PedirDatosCM(string tipoAutoCM, int anoFabricacionCM)
+void CamionMediano::PedirDatosCM(string tipoCombustibleCM, int anoFabricacionCM)
 {
     double precioFinal;
-    cout << "\n Ingrese la marca de la moto: ";
+    cout << "\n Ingrese la marca del Camion Mediano: ";
     cin >> this -> marca;
 
     precio = CalcularPrecioCM(marca);
 
     cout << "\n El precio base es: $" << precio;
     
-    precioFinal = CalcularDescuentos(precio, anoFabricacionCM, tipoAutoCM);
+    precioFinal = CalcularDescuentos(precio, anoFabricacionCM, tipoCombustibleCM);
     
     cout << "\n El precio final es: $" << fixed << setprecision(0) << precioFinal << endl;
+    
+    this->precio = static_cast<int>(precioFinal);
 }
 
 // Funcion para calcular el precio del CamionMediano segun la marca alojada en precios.h
@@ -246,19 +260,24 @@ int CamionMediano::CalcularPrecioCM(string marcaCamion)
 {
     marcaCamion = TransformarAMinusculas(marcaCamion);
     int precioBase = 0;
-    try {
-        precioBase = preciosCamiones.at(marcaCamion);
-    } catch(const out_of_range& e) 
+    while (true)
     {
-        cout << "Marca no encontrada en la lista de precios." << endl;
-        cout << "Ingrese una marca valida: ";
-        cin >> marcaCamion;
-        CalcularPrecioCM(marcaCamion);
+        try {
+            precioBase = preciosCamiones.at(marcaCamion);
+            this -> marca = marcaCamion;
+            break;
+        } catch(const out_of_range& e) 
+        {
+            cout << "Marca no encontrada en la lista de precios." << endl;
+            cout << "Ingrese una marca valida: ";
+            cin >> marcaCamion;
+            marcaCamion = TransformarAMinusculas(marcaCamion);
+        }
     }
     return precioBase;
 }
 
-double CalcularDescuentos(int precioBase, int anoFabricacion, string tipoAuto)
+double CalcularDescuentos(int precioBase, int anoFabricacion, string tipoCombustible)
 {
     double descuento = 0;
 
@@ -278,12 +297,13 @@ double CalcularDescuentos(int precioBase, int anoFabricacion, string tipoAuto)
     // Calcular el precio final con descuento
     double precioConDescuento = precioBase - (precioBase * descuento);
 
-    if (tipoAuto == "eléctrico" || tipoAuto == "gas") 
+    if (tipoCombustible == "eléctrico" || tipoCombustible == "gas" || tipoCombustible == "electrico" ) 
     {
         // Aplicar incremento de precio si es eléctrico o de gas
         // Aumentar el precio en un 20%
         precioConDescuento *= 1.2;
     }
+    
     return precioConDescuento;
 }
 

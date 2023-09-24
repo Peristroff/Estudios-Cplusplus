@@ -4,6 +4,7 @@
 #include "CSVparser.hpp"
 using namespace std;
 
+// Esta funcion crea el archivo .csv, pero elimina el antiguo para refrescar el contenido
 void CrearArchivo()
 {
     // Se ve un  poco extraño que elimine el anterior, pero es para que no se sobreescriba la cabecera una vez que el programa se ejecuta
@@ -17,9 +18,19 @@ void CrearArchivo()
         archivoSalida << cabecera << endl;
         archivoSalida.close();
     }
+    else 
+    {
+        string nombreArchivo = "Salida.csv";
+        string cabecera = "Nombre del cliente, RUT, Tipo de vehiculo comprado, Marca, N° de motor, Cantidad de ruedas, Tipo de automovil, Tanque de combustible, Año, Precio";
+        ofstream archivoSalida;
+        archivoSalida.open(nombreArchivo, ios::app);
+        archivoSalida << cabecera << endl;
+        archivoSalida.close();
+    }
     
 }
 
+// Esta funcion escribe en el archivo .csv
 void EscribirArchivo(string nombreCliente , string rutCliente , string tipoVehiculo , string marca , int numeroMotor, int cantidadRuedas, string tipoCombustible , string tanque , int anoFabricacion, int precio)
 {
     string nombreArchivo = "Salida.csv";
@@ -29,6 +40,7 @@ void EscribirArchivo(string nombreCliente , string rutCliente , string tipoVehic
     archivoSalida << fila << endl;
     archivoSalida.close();
 }
+
 string Minusculas(string palabra)
 {
     for (char &c : palabra) {
@@ -37,44 +49,52 @@ string Minusculas(string palabra)
 
     return palabra;
 }
+
 int CantidadVehiculos(string tipoVehiculo)
 {
-    // Para contar la cantidad de vehiculos
+    // Para contar la cantidad de vehículos
     csv::Parser file = csv::Parser("Salida.csv");
     tipoVehiculo = Minusculas(tipoVehiculo);
 
-    int AU, CA, MO = 0;
+    int AU = 0, CA = 0, MO = 0;
     unsigned int j = 2;
 
     for (unsigned int i = 0; i < file.rowCount(); i++)
     {
-        if (file[i][j] == tipoVehiculo && tipoVehiculo == "auto")
+        if (file[i][j] == tipoVehiculo)
         {
-            AU++;
-        }
-        if(file[i][j] == tipoVehiculo && tipoVehiculo == "camion")
-        {
-            CA++;
-        }
-        if(file[i][j] == tipoVehiculo && tipoVehiculo == "moto")
-        {
-            MO++;
+            if (tipoVehiculo == "auto")
+            {
+                AU++;
+            }
+            if (tipoVehiculo == "camion mediano")
+            {
+                CA++;
+            }
+            if (tipoVehiculo == "moto")
+            {
+                MO++;
+            }
         }
     }
+
     if (tipoVehiculo == "auto")
     {
         return AU;
     }
-    if (tipoVehiculo == "camion")
+    else if (tipoVehiculo == "camion mediano")
     {
         return CA;
     }
-    if (tipoVehiculo == "moto")
+    else if (tipoVehiculo == "moto")
     {
         return MO;
     }
-    else{ cout << "No se encontro ese vehiculo" << endl; return -1;}
-
+    else
+    {
+        cout << "No se encontro ese vehiculo" << endl;
+        return -1;
+    }
 }
 
 int VendidoVehiculos(string tipoVehiculo)
@@ -83,69 +103,101 @@ int VendidoVehiculos(string tipoVehiculo)
     csv::Parser file = csv::Parser("Salida.csv");
     tipoVehiculo = Minusculas(tipoVehiculo);
     
-    int AU, CA, MO, valor = 0;
+    int AU = 0, CA = 0, MO= 0, valor = 0;
     unsigned int j = 9;
 
     for (unsigned int i = 0; i < file.rowCount(); i++)
     {
-        if (file[i][2] == tipoVehiculo && tipoVehiculo == "auto")
+        if (file[i][2] == tipoVehiculo)
         {
-            valor = (stoi(file[i][j]));;
-            AU += valor;
-        }
-        if(file[i][2] == tipoVehiculo && tipoVehiculo == "camion")
-        {
-            valor = (stoi(file[i][j]));;
-            CA += valor;
-        }
-        if(file[i][2] == tipoVehiculo && tipoVehiculo == "moto")
-        {
-            valor = (stoi(file[i][j]));;
-            MO += valor;
+            valor = stoi(file[i][j]);
+            cout << "Valor: " << valor << endl;
+
+            if (tipoVehiculo == "auto")
+            {
+                AU += valor;
+            }
+            else if (tipoVehiculo == "camion mediano")
+            {
+                CA += valor;
+            }
+            else if (tipoVehiculo == "moto")
+            {
+                MO += valor;
+            }
         }
     }
     if (tipoVehiculo == "auto")
-    {
-        return AU;
-    }
-    if (tipoVehiculo == "camion")
-    {
-        return CA;
-    }
-    if (tipoVehiculo == "moto")
-    {
-        return MO;
-    }
-    else{ cout << "No se encontro ese vehiculo" << endl; return -1;}
-
+        {
+            return AU;
+        }
+        else if (tipoVehiculo == "camion mediano")
+        {
+            return CA;
+        }
+        else if (tipoVehiculo == "moto")
+        {
+            return MO;
+        }
+        else
+        {
+            cout << "No se encontro ese vehiculo" << endl;
+            return -1;
+        }
 }
 
 int PromedioVehiculos(string tipoVehiculo)
 {
-    // Calcular el promedio de los vehiculos por tipo
+    // Calcular el promedio de los vehículos por tipo
     tipoVehiculo = Minusculas(tipoVehiculo);
-    int AU, CA, MO, promedio = 0;
+    int AU = 0, AU2 = 0, CA = 0, CA2 = 0, MO = 0, MO2 = 0, promedio = 0;
 
-    if (tipoVehiculo == "auto")
+    if (tipoVehiculo == "auto" || tipoVehiculo == "camion mediano" || tipoVehiculo == "moto")
     {
-        AU = VendidoVehiculos(tipoVehiculo);
-        promedio = AU / CantidadVehiculos(tipoVehiculo);
-        return promedio;
-    }
-    if (tipoVehiculo == "camion")
-    {
-        CA = VendidoVehiculos(tipoVehiculo);
-        promedio = CA / CantidadVehiculos(tipoVehiculo);
-        return promedio;
-    }
-    if (tipoVehiculo == "moto")
-    {
-        MO = VendidoVehiculos(tipoVehiculo);
-        promedio = MO / CantidadVehiculos(tipoVehiculo);
-        return promedio;
-    }
-    else{ cout << "No se encontro ese vehiculo" << endl; return -1;}
+        csv::Parser file = csv::Parser("Salida.csv");
 
+        for (unsigned int i = 0; i < file.rowCount(); i++)
+        {
+            if (file[i][2] == tipoVehiculo)
+            {
+                int valor = stoi(file[i][9]);
+                if (tipoVehiculo == "auto")
+                {
+                    AU += valor;
+                    AU2++;
+                }
+                else if (tipoVehiculo == "camion mediano")
+                {
+                    CA += valor;
+                    CA2++;
+                }
+                else if (tipoVehiculo == "moto")
+                {
+                    MO += valor;
+                    MO2++;
+                }
+            }
+        }
+
+        if (tipoVehiculo == "auto")
+        {
+            promedio = AU / AU2;
+        }
+        else if (tipoVehiculo == "camion mediano")
+        {
+            promedio = CA / CA2;
+        }
+        else if (tipoVehiculo == "moto")
+        {
+            promedio = MO / MO2;
+        }
+        return promedio;
+    }
+    else
+    {
+        cout << "No se encontró ese vehículo" << endl;
+        return -1;
+    }
 }
 
 int PromedioGeneral()

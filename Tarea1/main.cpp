@@ -8,8 +8,6 @@
 #include "CSVparser.hpp"
 using namespace std;
 
-// TODO hacer pruebas con multiples entradas y probar los otros tipos de vehiculos
-// BUG el promedio de las ventas no se esta leyendo en el archivo csv
 int main() {
     CrearArchivo();
 
