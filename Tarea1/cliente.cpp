@@ -1,5 +1,6 @@
-#include "cliente.h"
 #include <iostream>
+#include "cliente.h"
+#include "administradorDeArchivos.h"
 using namespace std;
 
 Cliente::Cliente(string nombreCliente, string rutCliente)
@@ -13,6 +14,7 @@ Cliente::~Cliente()
     //cout << "\n Destructor de Cliente";
 }
 
+// Funcion para ingresar los datos a las variables de la clase
 void Cliente::PedirDatosC()
 {
     cout << "\n Ingrese el nombre del cliente: ";
@@ -20,10 +22,4 @@ void Cliente::PedirDatosC()
 
     cout << "\n Ingrese el RUT del cliente: ";
     cin >> this -> rut;
-}
-
-void Cliente::MostrarDatosC()
-{
-    cout << "\n Nombre: " << this -> nombre;
-    cout << "\n RUT: " << this -> rut;
 }

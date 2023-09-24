@@ -4,9 +4,8 @@ using namespace std;
 
 class Cliente
 {
-    protected:
-        string nombre, rut;
     public:
+        string nombre, rut;
         Cliente(string nombre, string rut);
         ~Cliente();
 

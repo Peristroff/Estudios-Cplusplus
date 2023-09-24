@@ -1,12 +1,16 @@
 #include <iostream>
 #include <string>
 #include <map>
+#pragma once
 using namespace std;
+
+extern std::string marcaG;
+extern int precioG;
 
 // Clase padre vehiculo, con los atributos numeroMotor, cantidadRuedas, tipoCombustible, anoFabricacion, tipoAuto, tanque
 class Vehiculo 
 {
-    // En vez de la variable deposito de combustible, se va a dejar la variable capTanque, que se debe ingresar los litros si es gasolina y el string NO si es electrico  
+    // En vez de la variable deposito de combustible, se va a dejar la variable capTanque, que se debe ingresar los litros si es gasolina y el string NO si es electrico
     public:
         int numeroMotor, cantidadRuedas, anoFabricacion;
         string tipoCombustible, tipoAuto, tanque;
@@ -28,37 +32,36 @@ class Auto:public Vehiculo
         Auto(string marca, int precio);
         ~Auto();
         
-        void PedirDatosA();
+        void PedirDatosA(string tipoAuto, int anoFrabricacion);
         void MostrarDatosA();
         int CalcularPrecioA(string marca);
 };
 
 class Moto:public Vehiculo
 {
-    protected:
+    public:
         string marca;
         int precio;
-    public:
         Moto(string marca, int precio);
         ~Moto();
 
-        void PedirDatosM();
+        void PedirDatosM(string tipoAuto, int anoFrabricacion);
         void MostrarDatosM();
-        void CalcularPrecioM();
+        int CalcularPrecioM(string marca);
 
 };
 
 class CamionMediano:public Vehiculo
 {
     protected:
-        string marca;
     public:
+        string marca;
         int precio;
 
         CamionMediano(string marca, int precio);
         ~CamionMediano();
 
-        void PedirDatosCM();
+        void PedirDatosCM(string tipoAuto, int anoFrabricacion);
         void MostrarDatosCM();
-        void CalcularPrecioCM();
+        int CalcularPrecioCM(string marca);
 };

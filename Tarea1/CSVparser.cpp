@@ -256,7 +256,7 @@ namespace csv {
   }
 
   std::ofstream &operator<<(std::ofstream &os, const Row &row)
-  {
+  { 
     for (unsigned int i = 0; i != row._values.size(); i++)
     {
         os << row._values[i];
