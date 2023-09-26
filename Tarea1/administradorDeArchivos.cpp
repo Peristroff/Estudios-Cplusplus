@@ -7,20 +7,12 @@ using namespace std;
 // Esta funcion crea el archivo .csv, pero elimina el antiguo para refrescar el contenido
 void CrearArchivo()
 {
+    string nombreArchivo = "Salida.csv";
+    ifstream archivoExistente(nombreArchivo);
+    bool archivoExiste = archivoExistente.good();
+    archivoExistente.close();
     // Se ve un  poco extraño que elimine el anterior, pero es para que no se sobreescriba la cabecera una vez que el programa se ejecuta
-    if ("Salida.csv"){
-        remove("Salida.csv");
-
-        string nombreArchivo = "Salida.csv";
-        string cabecera = "Nombre del cliente, RUT, Tipo de vehiculo comprado, Marca, N° de motor, Cantidad de ruedas, Tipo de automovil, Tanque de combustible, Año, Precio";
-        ofstream archivoSalida;
-        archivoSalida.open(nombreArchivo, ios::app);
-        archivoSalida << cabecera << endl;
-        archivoSalida.close();
-    }
-    else 
-    {
-        string nombreArchivo = "Salida.csv";
+    if (!archivoExiste){
         string cabecera = "Nombre del cliente, RUT, Tipo de vehiculo comprado, Marca, N° de motor, Cantidad de ruedas, Tipo de automovil, Tanque de combustible, Año, Precio";
         ofstream archivoSalida;
         archivoSalida.open(nombreArchivo, ios::app);

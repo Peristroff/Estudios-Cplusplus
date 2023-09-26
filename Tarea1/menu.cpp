@@ -68,10 +68,13 @@ void Menu::Submenu2()
                 cout << "Cantidad de camiones vendidos: " << CantidadVehiculos("camiones") << endl;
                 break;
             case 4:
+                int total;
                 cout << "Vehiculos totales vendidos" << endl;
                 cout << "\nAutos: " << CantidadVehiculos("auto") << endl;
                 cout << "Motos: " << CantidadVehiculos("moto") << endl;
                 cout << "Camiones medianos: " << CantidadVehiculos("camion mediano") << endl;
+                total = CantidadVehiculos("auto") + CantidadVehiculos("moto") + CantidadVehiculos("camion mediano");
+                cout << "Vehiculos vendidos en total: " << total << endl;
                 break;
             default:
                 cout << "Opción no válida." << endl;
