@@ -79,7 +79,6 @@ void Vehiculo::PedirDatosVehiculo()
     string autoSeleccionado;
 
     cout << "\n Ingrese el numero de motor: ";
-    //cin >> this -> numeroMotor;
     entradaValidaNumeros(this->numeroMotor);
 
     cout << "\n Ingrese la cantidad de ruedas: ";
