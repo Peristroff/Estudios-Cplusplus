@@ -1,0 +1,7 @@
+# Agregar aqui los archivos a ignorar por GitHub
+.vscode/
+Tarea1/Salida.csv
+Tarea1/Salida.csv
+Tarea1/build/Debug/administradorDeArchivos.o
+Tarea1/build/Debug/menu.o
+Tarea1/build/Debug/outDebug.exe
